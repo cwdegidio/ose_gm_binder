@@ -15,14 +15,14 @@ public class AttributesEntity {
 
     @Id
     @SequenceGenerator(
-            name = "stats_sequence",
-            sequenceName = "stats_sequence",
+            name = "attributes_sequence",
+            sequenceName = "attributes_sequence",
             initialValue = 100,
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "stats_sequence"
+            generator = "attributes_sequence"
     )
     private long id;
 

@@ -3,6 +3,7 @@ package com.cwdegidio.gmbinder.models;
 import com.cwdegidio.gmbinder.enums.Alignment;
 import com.cwdegidio.gmbinder.enums.CharacterClass;
 
+import java.util.List;
 import java.util.Map;
 
 public class PlayerCharacter {
@@ -14,12 +15,13 @@ public class PlayerCharacter {
     private Attributes attributes;
     private int level;
     private int maximumHitPoints;
+    private List<String> languages;
 
     public PlayerCharacter() {
     }
 
     public PlayerCharacter(long id, String name, CharacterClass characterClass, Alignment alignment,
-                           Attributes attributes, int level, int maximumHitPoints) {
+                           Attributes attributes, int level, int maximumHitPoints, List<String> languages) {
         this.id = id;
         this.name = name;
         this.characterClass = characterClass;
@@ -27,6 +29,7 @@ public class PlayerCharacter {
         this.attributes = attributes;
         this.level = level;
         this.maximumHitPoints = maximumHitPoints;
+        this.languages = languages;
     }
 
     public long getId() {
@@ -85,6 +88,14 @@ public class PlayerCharacter {
         this.maximumHitPoints = maximumHitPoints;
     }
 
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
+    }
+
     public Integer getWisdomBonusForSaveVsMagic() {
         return attributes.getWisdomBonus().get("magic_saves");
     }
@@ -111,6 +122,18 @@ public class PlayerCharacter {
 
     public Integer getCharismaModifierForReactions() {
         return attributes.getCharismaBonus().get("reactions");
+    }
+
+    public String getLiteracy() {
+        int literacyValue = attributes.getIntelligenceBonus().get("literacy");
+
+        if (literacyValue == -1) {
+            return "Illiterate";
+        } else if (literacyValue == 1) {
+            return "Literate";
+        }
+
+        return "Basic";
     }
 
     public int getListenAtDoors() {

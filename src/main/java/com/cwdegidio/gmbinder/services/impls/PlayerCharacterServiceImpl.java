@@ -2,10 +2,14 @@ package com.cwdegidio.gmbinder.services.impls;
 
 import com.cwdegidio.gmbinder.models.Attributes;
 import com.cwdegidio.gmbinder.models.PlayerCharacter;
+import com.cwdegidio.gmbinder.models.entities.LanguageEntity;
 import com.cwdegidio.gmbinder.models.entities.PlayerCharacterEntity;
 import com.cwdegidio.gmbinder.repositories.PlayerCharacterRepository;
 import com.cwdegidio.gmbinder.services.interfaces.PlayerCharacterService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerCharacterServiceImpl implements PlayerCharacterService {
@@ -45,7 +49,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
         character.setAttributes(attributes);
         character.setLevel(pcEntity.getLevel());
         character.setMaximumHitPoints(pcEntity.getMaxHitPoints());
-
+        character.setLanguages(pcEntity.getLanguages().stream().map(LanguageEntity::getName).collect(Collectors.toList()));
         return character;
     }
 }

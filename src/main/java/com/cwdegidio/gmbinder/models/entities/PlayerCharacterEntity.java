@@ -4,6 +4,8 @@ import com.cwdegidio.gmbinder.enums.Alignment;
 import com.cwdegidio.gmbinder.enums.CharacterClass;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "PLAYER_CHARACTER")
 public class PlayerCharacterEntity {
@@ -45,13 +47,19 @@ public class PlayerCharacterEntity {
     @Column(nullable = false, name = "max_hp")
     private int maxHitPoints;
 
-    // TODO: Languages / Literacy
+    @ManyToMany
+    @JoinTable(
+        name = "character_languages",
+        joinColumns = @JoinColumn(name = "player_character_id"),
+        inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private List<LanguageEntity> languages;
 
     public PlayerCharacterEntity() {
     }
 
     public PlayerCharacterEntity(String name, CharacterClass characterClass, String title, Alignment alignment, int level,
-                                 AttributesEntity stats, int maxHitPoints) {
+                                 AttributesEntity stats, int maxHitPoints, List<LanguageEntity> languages) {
         this.name = name;
         this.characterClass = characterClass;
         this.title = title;
@@ -59,6 +67,7 @@ public class PlayerCharacterEntity {
         this.level = level;
         this.attributesEntity = stats;
         this.maxHitPoints = maxHitPoints;
+        this.languages = languages;
     }
 
     public long getId() {
@@ -123,5 +132,13 @@ public class PlayerCharacterEntity {
 
     public void setMaxHitPoints(int maxHitPoints) {
         this.maxHitPoints = maxHitPoints;
+    }
+
+    public List<LanguageEntity> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<LanguageEntity> languages) {
+        this.languages = languages;
     }
 }

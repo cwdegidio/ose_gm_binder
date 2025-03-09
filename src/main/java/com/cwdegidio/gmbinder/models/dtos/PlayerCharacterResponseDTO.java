@@ -2,6 +2,8 @@ package com.cwdegidio.gmbinder.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public record PlayerCharacterResponseDTO(
         @JsonProperty long id,
         @JsonProperty String name,
@@ -10,6 +12,8 @@ public record PlayerCharacterResponseDTO(
         @JsonProperty String title,
         @JsonProperty int level,
         @JsonProperty("max_hp") int maximumHitPoints,
-        @JsonProperty("attributes") AttributesDTO stats
+        @JsonProperty AttributesDTO attributes,
+        @JsonProperty String literacy,
+        @JsonProperty List<String> languages
 ) {
 }

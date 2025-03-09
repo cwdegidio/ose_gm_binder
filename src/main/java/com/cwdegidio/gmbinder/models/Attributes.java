@@ -66,7 +66,7 @@ public class Attributes {
         return intelligence;
     }
 
-    public Map<String, Integer> getIntelligenceBonus(int intelligence) {
+    public Map<String, Integer> getIntelligenceBonus() {
         return AttributeBonuses.getIntelligenceBonus(intelligence);
     }
 
